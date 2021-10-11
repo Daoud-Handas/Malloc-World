@@ -8,8 +8,12 @@
 #ifndef C_HEADER_H
 #define C_HEADER_H
 
+//Ligne et Colonne
+#define ROW 5
+#define COLUMN 5
+
 //Code de tous les elements du jeu
-enum map{
+enum Map{
     Portail_2_et_3 = -3,
     Portail_1_et_2 = -2,
     Case_infranchissable = -1,
@@ -29,7 +33,7 @@ enum map{
     Boss = 99
 };
 
-enum player{
+enum Player{
     Epee_bois = 1,
     Pioche_bois = 2,
     Serpe_bois = 3,
@@ -45,7 +49,7 @@ enum player{
     Serpe_pierre = 13,
     Hache_pierre = 14,
     Potion_vie = 15,
-    Hêtre = 16,
+    Hetre = 16,
     Fer = 17,
     Lavande = 18,
     Epee_fer = 19,
@@ -71,19 +75,24 @@ typedef struct{
     int name;
     int type;
     int info;
-    struct inventory *next;
-}inventory;
+    struct Inventory *next;
+}Inventory;
 
 
 //Personnage principal
-struct mainCaractere{
+typedef struct{
     int xp;
     int level;
     int current_hp;
     int max_hp;
-    inventory* inventory;
-};
+    Inventory* inventory;
+}MainCharactere;
 
 
-void usePotion(struct mainCaractere*,int);
+//Prototypes
+void usePotion(MainCharactere*,int);
+void displayInventory();
+void addItemToInventory(Inventory*, int);
+void zone1(int**, int, int);
+
 #endif //C_HEADER_H
