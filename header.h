@@ -11,6 +11,7 @@
 //Ligne et Colonne
 #define ROW 5
 #define COLUMN 5
+#define MAXSLOT 10
 
 //Code de tous les elements du jeu
 enum Map{
@@ -33,7 +34,7 @@ enum Map{
     Boss = 99
 };
 
-enum Player{
+enum Item{
     Epee_bois = 1,
     Pioche_bois = 2,
     Serpe_bois = 3,
@@ -64,19 +65,32 @@ enum Player{
     Diamant = 28,
     Chanvre = 29,
     Epee_diamant = 30,
-    Mance_diamant = 31,
+    Lance_diamant = 31,
     Marteau_diamant = 32,
     Plastron_diamant = 33,
     Potion_vie_3 = 34
+};
+
+enum TypeItem
+{
+    Equipement = 1,
+    Ressource = 2
+};
+
+enum Direction{
+    Top = 1,
+    Bottom = 2,
+    Left = 3,
+    Right = 4
 };
 
 //Inventaire
 typedef struct{
     int name;
     int type;
-    int info;
-    struct Inventory *next;
-}Inventory;
+    int durability;
+    int damage;
+}InventoryPlayer;
 
 
 //Personnage principal
@@ -85,14 +99,20 @@ typedef struct{
     int level;
     int current_hp;
     int max_hp;
-    Inventory* inventory;
-}MainCharactere;
+    InventoryPlayer * inventory;
+}Player;
 
 
 //Prototypes
-void usePotion(MainCharactere*,int);
-void displayInventory();
-void addItemToInventory(Inventory*, int);
-void zone1(int**, int, int);
+void usePotion(Player*,int);
 
+void addItemToInventory(InventoryPlayer*, int);
+void generateZone(int**);
+void displayInventory();
+void displayTurn(int*);
+void displayZone (int**);
+void movePlayer(int**, InventoryPlayer*);
+void swapCase(int*, int*);
+void viewInventory(InventoryPlayer[]);
+void itemStart(InventoryPlayer*);
 #endif //C_HEADER_H
