@@ -117,9 +117,9 @@ void generateZone(int**);
 
 void displayInventory();
 void displayTurn(int*);
-void displayZone (int**);
+void displayZone (int**, int);
 
-void movePlayer(int**, InventoryPlayer*);
+void movePlayer(int**, InventoryPlayer*, int*);
 void swapCase(int*, int*);
 void viewInventory(InventoryPlayer*);
 void itemStart(InventoryPlayer*);
