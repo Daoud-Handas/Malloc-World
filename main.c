@@ -5,19 +5,28 @@
 #include <time.h>
 #include <ctype.h>
 
-#include "main.h"
+#include "header.h"
 
 
 
 int main()
 {
+    launchGame();
+    return 0;
+}
+
+//Lance l'incroyable aventure de Malloc World
+void launchGame()
+{
+
     int** zone1 = (int**)malloc(ROW * sizeof(int*));
     int game = 1;
     int choice = 0;
     int turn = 1;
     InventoryPlayer inventory[MAXSLOT] = {0,0,0,0};
 
-    for (int i = 0; i < ROW; i++)
+
+/*for (int i = 0; i < ROW; i++)
     {
         zone1[i] = (int*)malloc(COLUMN * sizeof(int));
     }
@@ -33,110 +42,113 @@ int main()
             }
         }
     }
+*/
 
     printf("BIENVENUE DANS MALLOC WORLD !\n\n\n");
     do {
         printf("Que voulez-vous faire ?\n1=>Nouvelle partie\n2=>Continuer\n3=>Quitter\n");
         scanf("%d",&choice);
         if(choice)
-        switch(choice)
-        {
-            case 1:
-                //generateZone(zone1);
-                itemStart(inventory);
-                displayTurn(&turn);
-                displayZone(zone1,Zone_1);
+            switch(choice)
+            {
+                case 1:
+                    generateZone(zone1,Zone_1);
+                    itemStart(inventory);
+                    displayTurn(&turn);
+                    displayZone(zone1,Zone_1);
 
-                while (game < 10){
-                    printf("\n\nQue voulez-vous faire ?\n1=>Se deplacer\n2=>Regarder l'inventaire\n");
-                    scanf("%d",&choice);
-                    if(choice == 1)
-                    {
-                        movePlayer(zone1,inventory,turn);
+                    while (game < 10){
+                        printf("\n\nQue voulez-vous faire ?\n1=>Se deplacer\n2=>Regarder l'inventaire\n");
+                        scanf("%d",&choice);
+                        if(choice == 1)
+                        {
+                            movePlayer(zone1,inventory,turn);
 
-                    } else if (choice == 2)
-                    {
-                        viewInventory(inventory);
+                        } else if (choice == 2)
+                        {
+                            viewInventory(inventory);
+                        }
+                        game += 1;
                     }
-                    game += 1;
-                }
-                break;
-            case 2:
-                printf("Pas disponible !\n\n\n");
-                break;
-            case 3:
-                printf("A bientot !");
-                game = 0;
-                break;
-            default:
-                printf("Les instructions sont claires pourtant, recommmence !\n");
-                break;
-        }
+                    break;
+                case 2:
+                    printf("Pas disponible !\n\n\n");
+                    break;
+                case 3:
+                    printf("A bientot !");
+                    game = 0;
+                    break;
+                default:
+                    printf("Les instructions sont claires pourtant, recommmence !\n");
+                    break;
+            }
     }while(game == 1);
 
-
-    for (int i = 0; i < ROW; i++)
-        free(zone1[i]);
-
-    free(zone1);
-    return 0;
 }
+
+//Affiche le nombre de tour
 void displayTurn(int* turn)
 {
     printf("Tour %d\n",*turn);
 }
 
+//Affiche la map
 void displayZone (int **tab,int zone)
 {
     if(zone == Zone_1)
     {
-        printf("=======ZONE1=======\n");
+        printf("=============ZONE1=============\n");
         for(int i = 0 ; i < ROW ; i += 1)
         {
 
-            printf(" %d | %d | %d | %d | %d \n", *(*(tab+i)), *(*(tab+i)+1), *(*(tab+i)+2), *(*(tab+i)+3), *(*(tab+i)+4));
-            printf("---+---+---+---+---\n");
+            printf("  %d  |  %d  |  %d  |  %d  |  %d  \n", tab[i][0], tab[i][1], tab[i][2], tab[i][3], tab[i][4]);
+            //Ajustement de la map
+            printf("-----+-----+-----+-----+-------\n");
         }
     }
 }
 
-void generateZone(int **tab)
+//Genere une map aleatoire
+void generateZone(int **tab, int zone)
 {
     int i, j;
-    int counterPlayer = 0;
     srand(time(NULL));
 
-    for (i = 0; i < ROW; i += 1)
+    for (int i = 0; i < ROW; i++)
     {
-
-        for (j = 0; j < COLUMN; j += 1)
+        tab[i] = (int*)malloc(COLUMN * sizeof(int));
+    }
+    if(zone = Zone_1)
+    {
+        for (i = 0; i < ROW; i += 1)
         {
-            if(counterPlayer == 0)
+            for (j = 0; j < COLUMN; j += 1)
             {
-                if (j % 4 == 0 && j != 0)
+                if(i == 2 && j == 2)
                 {
-
-                    tab[i][j] = rand() % (11 + 1 - 0) + 0; //*(tab[i]+j) == tab[i][j]
-                    tab[i][j] == 1 ? counterPlayer += 1 : 1;//Empeche d'avoir 2 joueurs (1) dans la carte
-
-                } else
+                    tab[i][j] = Joueur;
+                    continue;
+                } else if(i == (rand() % (4 + 1 - 0) + 0) && j == (rand() % (4 + 1 - 0) + 0))
                 {
-                    tab[i][j]  = rand() % (11 + 1 - 0) + 0;
-
-                    tab[i][j] == 1 ? counterPlayer += 1 : 1;
+                    tab[i][j] = Portail_1_et_2;
+                    continue;
+                } else if(i == (rand() % (4 + 1 - 0) + 0) && j == (rand() % (4 + 1 - 0) + 0))
+                {
+                    tab[i][j] = PNJ;
+                    continue;
                 }
-            } else {
-                if (j % 4 == 0 && j != 0)
+                tab[i][j] = rand() % (5 + 1 - 0) + 0;//Remplissage de case aléatoire allant de 0 à 11
+                if(tab[i][j] == 1 )
                 {
-                    tab[i][j] = rand() % (11 + 1 - 2) + 2;
-
-                } else
+                    tab[i][j] = Zone_libre;
+                } else if(tab[i][j] == 2)
                 {
-                    tab[i][j] = rand() % (11 + 1 - 2) + 2;
+                    tab[i][j] = Case_infranchissable;
                 }
             }
         }
     }
+
 }
 
 //Traduit les enums des items en renvoyant leur equivalent en string
@@ -191,7 +203,7 @@ const char* getItemType(enum TypeItem type)
     }
 }
 
-//Equipement donn� au d�but de la partie
+//Equipement donné au début de la partie
 void itemStart(InventoryPlayer* inventory)
 {
     inventory[0].name = Epee_bois;
@@ -206,7 +218,7 @@ void itemStart(InventoryPlayer* inventory)
 
     inventory[2].name = Serpe_bois;
     inventory[2].type = Equipement;
-    inventory[2].durability = 1;
+    inventory[2].durability = 10;
     inventory[2].damage = 0;
 
     inventory[3].name = Hache_bois;
@@ -215,6 +227,7 @@ void itemStart(InventoryPlayer* inventory)
     inventory[3].damage = 0;
 }
 
+//Regarder le contenu de l'inventaire
 void viewInventory(InventoryPlayer* inventory)
 {
     for(int i = 0 ; i < MAXSLOT ; i += 1)
@@ -230,6 +243,7 @@ void viewInventory(InventoryPlayer* inventory)
     }
 }
 
+//Verification de la presence d'un objet dans l'inventaire
 int checkItem(InventoryPlayer* inventory, enum Item item)
 {
     int result = 0;
@@ -244,90 +258,381 @@ int checkItem(InventoryPlayer* inventory, enum Item item)
     return result;
 }
 
-void movePlayer(int** zone, InventoryPlayer* inventory, int* turn)
+void talkPNJ()
 {
-    int direction;
-    printf("Dans quelle direction voulez-vous aller ?(Haut = 1 | Bas = 2 | Gauche = 3 | Droite = 4)\n");
-    scanf("%d",&direction);
-    if(direction == Top)
+    printf("Je parle au PNJ");
+}
+
+//Deplacement vers le haut
+void moveTop(int** zone, InventoryPlayer* inventory, int* turn)
+{
+    for(int i = 0 ; i < ROW ; i += 1)
     {
-        for(int i = 0 ; i < ROW ; i += 1)
+        for(int j = 0 ; j < COLUMN ; j += 1)
         {
-            for(int j = 0 ; j < COLUMN ; j += 1)
+
+            if(zone[i][j] == Joueur)//On localise l'emplacement du joueur
             {
-
-                if(zone[i][j] == Joueur)//On localise l'emplacement du joueur
+                if(i > 0)//On empeche de depasser la limite de la map vers le haut
                 {
-                    if(i > 0)//On empeche de depasser la limite de la map vers le haut
+                    switch (zone[i-1][j])
                     {
-                        switch (zone[i-1][j])
-                        {
-                            case Case_infranchissable:
-                                printf("Deplacement impossible !\n");
-                                break;
+                        case Case_infranchissable:
+                            printf("Deplacement impossible !\n");
+                            break;
 
-                            case Zone_libre: //En cas de d�placement vers une case libre
-                                swapCase(&zone[i][j],&zone[i-1][j]);
-                                turn += 1;
+                        case Zone_libre: //En cas de déplacement vers une case libre
+                            swapCase(&zone[i][j],&zone[i-1][j]);
+                            turn += 1;
+                            displayTurn(&turn);
+                            displayZone(zone,Zone_1);
+                            break;
+
+                        case Plante_zone_1://En cas de rencontre d'une plante de la zone 1
+
+                            if(checkItem(inventory, Serpe_bois) == 1)
+                            {
+                                addPlantInventory(inventory,Zone_1);
+                                zone[i-1][j] = Zone_libre;
                                 displayTurn(&turn);
                                 displayZone(zone,Zone_1);
-                                break;
+                            }else
+                            {
+                                printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
+                                displayZone(zone,Zone_1);
+                            }
+                            break;
 
-                            case Plante_zone_1://En cas de rencontre d'une plante de la zone 1
+                        case Bois_zone_1:
+                            if(checkItem(inventory, Hache_bois) == 1)
+                            {
+                                addWoodInventory(inventory,Zone_1);
+                                zone[i-1][j] = Zone_libre;
+                                displayTurn(&turn);
+                                displayZone(zone,Zone_1);
+                            }else
+                            {
+                                printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
+                                displayZone(zone, Zone_1);
+                            }
+                            break;
 
-                                if(checkItem(inventory, Serpe_bois) == 1)
-                                {
-                                    addPlantInventory(inventory,Zone_1);
-                                    zone[i-1][j] = Zone_libre;
-                                    displayTurn(&turn);
-                                    displayZone(zone,Zone_1);
-                                }else
-                                {
-                                    printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
-                                    displayZone(zone,Zone_1);
-                                }
-                                break;
+                        case Rocher_zone_1:
+                            if(checkItem(inventory, Pioche_bois) == 1)
+                            {
+                                addStoneInventory(inventory,Zone_1);
+                                zone[i-1][j] = Zone_libre;
+                                displayTurn(&turn);
+                                displayZone(zone, Zone_1);
+                            }else
+                            {
+                                printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
+                                displayZone(zone, Zone_1);
+                            }
+                            break;
 
-                            case Bois_zone_1:
-                                if(checkItem(inventory, Hache_bois) == 1)
-                                {
-                                    addWoodInventory(inventory,Zone_1);
-                                    zone[i-1][j] = Zone_libre;
-                                    displayTurn(&turn);
-                                    displayZone(zone,Zone_1);
-                                }else
-                                {
-                                    printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
-                                    displayZone(zone, Zone_1);
-                                }
-                                break;
+                        case PNJ:
+                            talkPNJ();
+                            break;
+                        case Portail_1_et_2:
+                            //Si le joueur a le niveau requis
+                            generateZone(zone, Zone_2);
 
-                            case Rocher_zone_1:
-                                if(checkItem(inventory, Pioche_bois) == 1)
-                                {
-                                    addStoneInventory(inventory,Zone_1);
-                                    zone[i-1][j] = Zone_libre;
-                                    displayTurn(&turn);
-                                    displayZone(zone, Zone_1);
-                                }else
-                                {
-                                    printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
-                                    displayZone(zone, Zone_1);
-                                }
-                                break;
-
-                            default:
-                                printf("Deplacement impossible !\n");
-                        }
-                    }else
-                    {
-                        printf("Deplacement impossible !\n");
+                        default:
+                            printf("Deplacement impossible !\n");
+                            displayZone(zone,Zone_1);
                     }
+                }else
+                {
+                    printf("Deplacement impossible !\n");
+                    displayZone(zone,Zone_1);
                 }
             }
         }
     }
 }
+
+//Deplacement vers le bas
+void moveBottom(int** zone, InventoryPlayer* inventory, int* turn)
+{
+    for(int i = 0 ; i < ROW ; i += 1)
+    {
+        for(int j = 0 ; j < COLUMN ; j += 1)
+        {
+
+            if(zone[i][j] == Joueur)//On localise l'emplacement du joueur
+            {
+                if(i > 0)//On empeche de depasser la limite de la map vers le haut
+                {
+                    switch (zone[i+1][j])
+                    {
+                        case Case_infranchissable:
+                            printf("Deplacement impossible !\n");
+                            break;
+
+                        case Zone_libre: //En cas de déplacement vers une case libre
+                            swapCase(&zone[i][j],&zone[i+1][j]);
+                            turn += 1;
+                            displayTurn(&turn);
+                            displayZone(zone,Zone_1);
+                            break;
+
+                        case Plante_zone_1://En cas de rencontre d'une plante de la zone 1
+
+                            if(checkItem(inventory, Serpe_bois) == 1)
+                            {
+                                addPlantInventory(inventory,Zone_1);
+                                zone[i+1][j] = Zone_libre;
+                                displayTurn(&turn);
+                                displayZone(zone,Zone_1);
+                            }else
+                            {
+                                printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
+                                displayZone(zone,Zone_1);
+                            }
+                            break;
+
+                        case Bois_zone_1:
+                            if(checkItem(inventory, Hache_bois) == 1)
+                            {
+                                addWoodInventory(inventory,Zone_1);
+                                zone[i+1][j] = Zone_libre;
+                                displayTurn(&turn);
+                                displayZone(zone,Zone_1);
+                            }else
+                            {
+                                printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
+                                displayZone(zone, Zone_1);
+                            }
+                            break;
+
+                        case Rocher_zone_1:
+                            if(checkItem(inventory, Pioche_bois) == 1)
+                            {
+                                addStoneInventory(inventory,Zone_1);
+                                zone[i+1][j] = Zone_libre;
+                                displayTurn(&turn);
+                                displayZone(zone, Zone_1);
+                            }else
+                            {
+                                printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
+                                displayZone(zone, Zone_1);
+                            }
+                            break;
+                        case Portail_1_et_2:
+                            //Si le joueur a le niveau requis
+                            generateZone(zone, Zone_2);
+
+                        default:
+                            printf("Deplacement impossible !\n");
+                            displayZone(zone,Zone_1);
+                    }
+                }else
+                {
+                    printf("Deplacement impossible !\n");
+                    displayZone(zone,Zone_1);
+                }
+            }
+        }
+    }
+}
+
+//Deplacement vers la gauche
+void moveLeft(int** zone, InventoryPlayer* inventory, int* turn)
+{
+    for(int i = 0 ; i < ROW ; i += 1)
+    {
+        for(int j = 0 ; j < COLUMN ; j += 1)
+        {
+
+            if(zone[i][j] == Joueur)//On localise l'emplacement du joueur
+            {
+                if(i > 0)//On empeche de depasser la limite de la map vers le haut
+                {
+                    switch (zone[i][j-1])
+                    {
+                        case Case_infranchissable:
+                            printf("Deplacement impossible !\n");
+                            break;
+
+                        case Zone_libre: //En cas de déplacement vers une case libre
+                            swapCase(&zone[i][j],&zone[i][j-1]);
+                            turn += 1;
+                            displayTurn(&turn);
+                            displayZone(zone,Zone_1);
+                            break;
+
+                        case Plante_zone_1://En cas de rencontre d'une plante de la zone 1
+
+                            if(checkItem(inventory, Serpe_bois) == 1)
+                            {
+                                addPlantInventory(inventory,Zone_1);
+                                zone[i][j-1] = Zone_libre;
+                                displayTurn(&turn);
+                                displayZone(zone,Zone_1);
+                            }else
+                            {
+                                printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
+                                displayZone(zone,Zone_1);
+                            }
+                            break;
+
+                        case Bois_zone_1:
+                            if(checkItem(inventory, Hache_bois) == 1)
+                            {
+                                addWoodInventory(inventory,Zone_1);
+                                zone[i][j-1] = Zone_libre;
+                                displayTurn(&turn);
+                                displayZone(zone,Zone_1);
+                            }else
+                            {
+                                printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
+                                displayZone(zone, Zone_1);
+                            }
+                            break;
+
+                        case Rocher_zone_1:
+                            if(checkItem(inventory, Pioche_bois) == 1)
+                            {
+                                addStoneInventory(inventory,Zone_1);
+                                zone[i][j-1] = Zone_libre;
+                                displayTurn(&turn);
+                                displayZone(zone, Zone_1);
+                            }else
+                            {
+                                printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
+                                displayZone(zone, Zone_1);
+                            }
+                            break;
+                        case Portail_1_et_2:
+                            //Si le joueur a le niveau requis
+                            generateZone(zone, Zone_2);
+
+                        default:
+                            printf("Deplacement impossible !\n");
+                            displayZone(zone,Zone_1);
+                    }
+                }else
+                {
+                    printf("Deplacement impossible !\n");
+                    displayZone(zone,Zone_1);
+                }
+            }
+        }
+    }
+}
+
+//Deplacement vers la droite
+void moveRight(int** zone, InventoryPlayer* inventory, int* turn)
+{
+    for(int i = 0 ; i < ROW ; i += 1)
+    {
+        for(int j = 0 ; j < COLUMN ; j += 1)
+        {
+
+            if(zone[i][j] == Joueur)//On localise l'emplacement du joueur
+            {
+                if(i > 0)//On empeche de depasser la limite de la map vers le haut
+                {
+                    switch (zone[i][j+1])
+                    {
+                        case Case_infranchissable:
+                            printf("Deplacement impossible !\n");
+                            break;
+
+                        case Zone_libre: //En cas de déplacement vers une case libre
+                            swapCase(&zone[i][j],&zone[i][j+1]);
+                            turn += 1;
+                            displayTurn(&turn);
+                            displayZone(zone,Zone_1);
+                            break;
+
+                        case Plante_zone_1://En cas de rencontre d'une plante de la zone 1
+
+                            if(checkItem(inventory, Serpe_bois) == 1)
+                            {
+                                addPlantInventory(inventory,Zone_1);
+                                zone[i][j+1] = Zone_libre;
+                                displayTurn(&turn);
+                                displayZone(zone,Zone_1);
+                            }else
+                            {
+                                printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
+                                displayZone(zone,Zone_1);
+                            }
+                            break;
+
+                        case Bois_zone_1:
+                            if(checkItem(inventory, Hache_bois) == 1)
+                            {
+                                addWoodInventory(inventory,Zone_1);
+                                zone[i][j+1] = Zone_libre;
+                                displayTurn(&turn);
+                                displayZone(zone,Zone_1);
+                            }else
+                            {
+                                printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
+                                displayZone(zone, Zone_1);
+                            }
+                            break;
+
+                        case Rocher_zone_1:
+                            if(checkItem(inventory, Pioche_bois) == 1)
+                            {
+                                addStoneInventory(inventory,Zone_1);
+                                zone[i][j+1] = Zone_libre;
+                                displayTurn(&turn);
+                                displayZone(zone, Zone_1);
+                            }else
+                            {
+                                printf("\nVous n'avez pas l'equipement necessaire pour passer !\n\n");
+                                displayZone(zone, Zone_1);
+                            }
+                            break;
+                        case Portail_1_et_2:
+                            //Si le joueur a le niveau requis
+                            generateZone(zone, Zone_2);
+
+                        default:
+                            printf("Deplacement impossible !\n");
+                            displayZone(zone,Zone_1);
+                    }
+                }else
+                {
+                    printf("Deplacement impossible !\n");
+                    displayZone(zone,Zone_1);
+                }
+            }
+        }
+    }
+}
+
+//Deplacement du joueur
+void movePlayer(int** zone, InventoryPlayer* inventory, int* turn)
+{
+    int direction;
+    printf("Dans quelle direction voulez-vous aller ?(Haut = 1 | Bas = 2 | Gauche = 3 | Droite = 4)\n");
+    scanf("%d",&direction);
+
+    if(direction == Top)//Deplacement vers le haut
+    {
+        moveTop(zone, inventory, turn);
+
+    } else if(direction == Bottom)//Deplacement vers le bad
+    {
+        moveBottom(zone, inventory, turn);
+
+    } else if(direction == Left)//Deplacement vers la gauche
+    {
+        moveLeft(zone, inventory, turn);
+
+    } else if(direction == Right)//Deplacement vers la droite
+    {
+        moveRight(zone, inventory, turn);
+    }
+}
+
+//Suppression d'un objet dans l'inventaire
 void deleteItem(InventoryPlayer* inventory, enum Item item)
 {
     for(int i = 0 ; i < MAXSLOT ; i += 1)
@@ -343,7 +648,7 @@ void deleteItem(InventoryPlayer* inventory, enum Item item)
     }
 }
 
-
+//Ajout d'une plante dans l'inventaire
 void addPlantInventory(InventoryPlayer* inventory, int zone)
 {
     if(zone == Zone_1)
@@ -372,6 +677,7 @@ void addPlantInventory(InventoryPlayer* inventory, int zone)
     }
 }
 
+//Ajout de bois dans l'inventaire
 void addWoodInventory(InventoryPlayer* inventory, int zone)
 {
     if(zone == Zone_1)
@@ -400,6 +706,7 @@ void addWoodInventory(InventoryPlayer* inventory, int zone)
     }
 }
 
+//Ajout d'une pierre dans l'inventaire
 void addStoneInventory(InventoryPlayer* inventory, int zone)
 {
     if(zone == Zone_1)
@@ -429,6 +736,7 @@ void addStoneInventory(InventoryPlayer* inventory, int zone)
     }
 }
 
+//Echange de case
 void swapCase(int* case1, int* case2){
     int *tmp;
 
@@ -436,6 +744,7 @@ void swapCase(int* case1, int* case2){
     *case1 = *case2;
     *case2 = tmp;
 }
+
 //Utiliser une potion
 void usePotion (Player* character, int potion)
 {

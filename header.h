@@ -5,8 +5,8 @@
  * Contain all struct and prototype
  */
 
-#ifndef C_HEADER_H
-#define C_HEADER_H
+#ifndef C_MAIN_H
+#define C_MAIN_H
 
 //Ligne et Colonne
 #define ROW 5
@@ -30,8 +30,14 @@ enum Map{
     Plante_zone_3 = 9,
     Rocher_zone_3 = 10,
     Bois_zone_3 = 11,
-    //Monstres = 12 à 98
+    //Monstres = 12 a 98
     Boss = 99
+};
+
+enum Zone{
+    Zone_1 = 1,
+    Zone_2 = 2,
+    Zone_3 = 3
 };
 
 enum Item{
@@ -85,7 +91,7 @@ enum Direction{
 };
 
 //Inventaire
-typedef struct{
+typedef struct {
     int name;
     int type;
     int durability;
@@ -104,15 +110,27 @@ typedef struct{
 
 
 //Prototypes
+void launchGame();
+
 void usePotion(Player*,int);
 
 void addItemToInventory(InventoryPlayer*, int);
-void generateZone(int**);
+void generateZone(int**, int);
+
 void displayInventory();
 void displayTurn(int*);
-void displayZone (int**);
-void movePlayer(int**, InventoryPlayer*);
+void displayZone (int**, int);
+void moveTop(int**, InventoryPlayer*, int*);
+void movePlayer(int**, InventoryPlayer*, int*);
 void swapCase(int*, int*);
-void viewInventory(InventoryPlayer[]);
+void viewInventory(InventoryPlayer*);
 void itemStart(InventoryPlayer*);
+
+void addPlantInventory(InventoryPlayer*, int);
+void addWoodInventory(InventoryPlayer*, int);
+void addStoneInventory(InventoryPlayer*, int);
+void talkPNJ();
+
+int checkItem(InventoryPlayer*, enum Item);
+void deleteItem(InventoryPlayer*, enum Item);
 #endif //C_HEADER_H
