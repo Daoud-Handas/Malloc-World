@@ -93,6 +93,7 @@ enum Direction{
 //Inventaire
 typedef struct {
     int name;
+    int quantity;
     int type;
     int durability;
     int damage;
@@ -111,7 +112,7 @@ typedef struct{
 
 //Prototypes
 void launchGame();
-
+void freeZone(int**);
 void usePotion(Player*,int);
 
 void addItemToInventory(InventoryPlayer*, int);
@@ -132,5 +133,6 @@ void addStoneInventory(InventoryPlayer*, int);
 void talkPNJ();
 
 int checkItem(InventoryPlayer*, enum Item);
+void brokenTool(InventoryPlayer*, enum Item);
 void deleteItem(InventoryPlayer*, enum Item);
 #endif //C_HEADER_H
