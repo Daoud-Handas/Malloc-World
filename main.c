@@ -55,7 +55,7 @@ void launchGame()
     {
         zone1[i] = (int*)malloc(COLUMN * sizeof(int));
     }
-  for(int i = 0  ; i < ROW ; i += 1)
+  /*for(int i = 0  ; i < ROW ; i += 1)
     {
         for(int j = 0  ; j < COLUMN ; j += 1)
         {
@@ -65,7 +65,7 @@ void launchGame()
                 zone1[i][j] = 1;
             }
         }
-    }
+    }*/
 
 
     printf("BIENVENUE DANS MALLOC WORLD !\n\n\n");
@@ -76,7 +76,7 @@ void launchGame()
             switch(choice)
             {
                 case 1:
-                    //generateZone(zone1,Zone_1);
+                    generateZone(zone1,Zone_1);
                     itemStart(inventory);//Attribue les equipements de départ
 
                     while (game < 10){
@@ -749,16 +749,17 @@ void addPlantInventory(InventoryPlayer* inventory, int zone)
 {
     srand(time(NULL));
     int counter = 0;
+
     if(zone == Zone_1)
     {
         for(int i = 0 ; i < MAXSLOT ; i += 1)
         {
             if(inventory[i].name == 0)//Si un emplacement est vide
             {
-                inventory[i].quantity = inventory[i].quantity + rand() % (30 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 sapins
+                inventory[i].quantity = inventory[i].quantity + rand() % (4 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 herbes
                 inventory[i].name = Herbe;
                 inventory[i].type = Ressource;
-                for(int i = 0 ; i < MAXSLOT ; i += 1)
+                for(i = 0 ; i < MAXSLOT ; i += 1)
                 {
                     if(inventory[i].name == Serpe_bois)
                     {
@@ -773,28 +774,33 @@ void addPlantInventory(InventoryPlayer* inventory, int zone)
                 break;
             }else if(inventory[i].name == Herbe)//Si le joueur possède déjà de l'herbe
             {
+
                 inventory[i].quantity += rand() % (30 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 sapins
+
                 if(inventory[i].quantity > 20)
                 {
                     //On récupère les ressources au dessus de 20
                     while(inventory[i].quantity > 20)
                     {
                         inventory[i].quantity -= 1;
+
                         counter += 1;
                     }
 
                     i = 0;//On refait le tour de l'inventaire
-                    for(int i = 0 ; i < MAXSLOT ; i += 1)
+                    for(i = 0 ; i < MAXSLOT ; i += 1)
                     {
                         if(inventory[i].name == 0)//Si un emplacement est vide
                         {
                             inventory[i].quantity += counter;//Met à l'emplacement suivant le reste des ressources
                             inventory[i].name = Herbe;
                             inventory[i].type = Ressource;
+                            break;
                         }
                     }
-
                 }
+                break;
+
             }else if(i == MAXSLOT-1)//On a parcouru tout l'inventaire
             {
                 printf("\nVous n'avez plus de place dans votre inventaire !\n");
@@ -806,15 +812,19 @@ void addPlantInventory(InventoryPlayer* inventory, int zone)
 //Ajout de bois dans l'inventaire
 void addWoodInventory(InventoryPlayer* inventory, int zone)
 {
+    srand(time(NULL));
+    int counter = 0;
+
     if(zone == Zone_1)
     {
         for(int i = 0 ; i < MAXSLOT ; i += 1)
         {
             if(inventory[i].name == 0)
             {
+                inventory[i].quantity = inventory[i].quantity + rand() % (4 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 sapins
                 inventory[i].name = Sapin;
                 inventory[i].type = Ressource;
-                for(int i = 0 ; i < MAXSLOT ; i += 1)
+                for(i = 0 ; i < MAXSLOT ; i += 1)
                 {
                     if(inventory[i].name == Hache_bois)
                     {
@@ -827,6 +837,37 @@ void addWoodInventory(InventoryPlayer* inventory, int zone)
                     }
                 }
                 break;
+            }else if(inventory[i].name == Sapin)//Si le joueur possède déjà des sapins
+            {
+                inventory[i].quantity += rand() % (4 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 sapins
+                printf("%d",inventory[i].quantity);
+
+                if(inventory[i].quantity > 20)
+                {
+                    //On récupère les ressources au dessus de 20
+                    while(inventory[i].quantity > 20)
+                    {
+                        inventory[i].quantity -= 1;
+                        counter += 1;
+                    }
+
+                    i = 0;//On refait le tour de l'inventaire
+                    for(i = 0 ; i < MAXSLOT ; i += 1)
+                    {
+                        if(inventory[i].name == 0)//Si un emplacement est vide
+                        {
+                            inventory[i].quantity += counter;//Met à l'emplacement suivant le reste des ressources
+                            inventory[i].name = Sapin;
+                            inventory[i].type = Ressource;
+                            break;
+                        }
+                    }
+                }
+                break;
+
+            }else if(i == MAXSLOT-1)//On a parcouru tout l'inventaire
+            {
+                printf("\nVous n'avez plus de place dans votre inventaire !\n");
             }
         }
     }
@@ -835,16 +876,20 @@ void addWoodInventory(InventoryPlayer* inventory, int zone)
 //Ajout d'une pierre dans l'inventaire
 void addStoneInventory(InventoryPlayer* inventory, int zone)
 {
+    srand(time(NULL));
+    int counter = 0;
+
     if(zone == Zone_1)
     {
         for(int i = 0 ; i < MAXSLOT ; i += 1)
         {
             if(inventory[i].name == 0)
             {
+                inventory[i].quantity = inventory[i].quantity + rand() % (4 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 pierres
                 inventory[i].name = Pierre;
                 inventory[i].type = Ressource;
 
-                for(int i = 0 ; i < MAXSLOT ; i += 1)
+                for(i = 0 ; i < MAXSLOT ; i += 1)
                 {
                     if(inventory[i].name == Pioche_bois)
                     {
@@ -856,7 +901,38 @@ void addStoneInventory(InventoryPlayer* inventory, int zone)
                         }
                     }
                 }
+            }else if(inventory[i].name == Pierre)//Si le joueur possède déjà des pierres
+            {
+
+                inventory[i].quantity += rand() % (4 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 pierres
+
+                if(inventory[i].quantity > 20)
+                {
+                    //On récupère les ressources au dessus de 20
+                    while(inventory[i].quantity > 20)
+                    {
+                        inventory[i].quantity -= 1;
+
+                        counter += 1;
+                    }
+
+                    i = 0;//On refait le tour de l'inventaire
+                    for(i = 0 ; i < MAXSLOT ; i += 1)
+                    {
+                        if(inventory[i].name == 0)//Si un emplacement est vide
+                        {
+                            inventory[i].quantity += counter;//Met à l'emplacement suivant le reste des ressources
+                            inventory[i].name = Pierre;
+                            inventory[i].type = Ressource;
+                            break;
+                        }
+                    }
+                }
                 break;
+
+            }else if(i == MAXSLOT-1)//On a parcouru tout l'inventaire
+            {
+                printf("\nVous n'avez plus de place dans votre inventaire !\n");
             }
         }
     }
