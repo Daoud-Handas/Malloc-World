@@ -242,24 +242,28 @@ void itemStart(InventoryPlayer* inventory)
     inventory[0].name = Epee_bois;
     inventory[0].type = Equipement;
     inventory[0].durability = 10;
+    inventory[0].maxDurability = 10;
     inventory[0].damage = 10;
 
     inventory[1].quantity = 1;
     inventory[1].name = Pioche_bois;
     inventory[1].type = Equipement;
     inventory[1].durability = 10;
+    inventory[1].maxDurability = 10;
     inventory[1].damage = 0;
 
     inventory[2].quantity = 1;
     inventory[2].name = Serpe_bois;
     inventory[2].type = Equipement;
     inventory[2].durability = 10;
+    inventory[2].maxDurability = 10;
     inventory[2].damage = 0;
 
     inventory[3].quantity = 1;
     inventory[3].name = Hache_bois;
     inventory[3].type = Equipement;
     inventory[3].durability = 10;
+    inventory[3].maxDurability = 10;
     inventory[3].damage = 0;
 }
 
@@ -295,8 +299,62 @@ int checkItem(InventoryPlayer* inventory, enum Item item)
     return result;
 }
 
+//Reparer arme/outil
+void repairTool(InventoryPlayer* inventory)
+{
+    int item[MAXSLOT] = {0};
+    int usedItem = 0;
+    int choice = 0;
+
+    for(int i = 0 ; i < MAXSLOT ; i += 1)
+    {
+        //On verifie si un equipement possede une durabilite inferieur à son maximum (donc usé)
+        if(inventory[i].type == Equipement && inventory[i].durability < inventory[i].maxDurability)
+        {
+            item[usedItem] = i;
+            usedItem += 1;
+        }
+    }
+
+    //Si on trouve une arme/outil usé(e)
+    if(usedItem > 0)
+    {
+        printf("\nIl semblerait que vous avez besoin de mon expertise ! Lequel voulez-vous que je repare ?\n");
+        for(int i = 0 ; i < usedItem ; i += 1)
+        {
+            printf("%d=>%s : Durabilite %d->%d \n", i+1, getItemName(inventory[item[i]].name),inventory[item[i]].durability, inventory[item[i]].maxDurability);
+        }
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            if (choice <= usedItem && choice > 0)
+            {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                    inventory[item[choice-1]].durability = inventory[item[choice-1]].maxDurability;
+                    printf("\nEt voila ! Votre %s est comme neuf !\n", getItemName(inventory[item[choice-1]].name));
+                    break;
+            }
+            default:
+                printf("Arretez de vous moquer de moi ! Si vous ne voulez rien reparer changeons de sujet !\n\n");
+                break;
+        }
+    }else
+    {
+        printf("\nVous n'avez rien a reparer, arretez de me faire perdre du temps !\n");
+    }
+}
+
 //Se deplacer vers le pnj
-void talkPNJ()
+void talkPNJ(InventoryPlayer* inventory)
 {
     int choice;
     int end = 1;
@@ -308,7 +366,7 @@ void talkPNJ()
         switch(choice)
         {
             case 1:
-                printf("1");
+                repairTool(inventory);
                 printf("\nBesoin d'autre chose ?\n1=>Reparer equipement\n2=>Construire equipement\n3=>Gerer l'inventaire\n4=>Partir\n");
                 scanf("%d",&choice);
                 break;
@@ -323,7 +381,7 @@ void talkPNJ()
                 scanf("%d",&choice);
                 break;
             case 4:
-                printf("\nA bientot !\n");
+                printf("\nA bientot !\n\n");
                 end = 0;
                 break;
         }
@@ -401,7 +459,7 @@ void moveTop(int** zone, InventoryPlayer* inventory, int* turn)
                             break;
 
                         case PNJ:
-                            talkPNJ();
+                            talkPNJ(inventory);
                             *(turn) += 1;
                             displayTurn(turn);
                             break;
@@ -502,6 +560,12 @@ void moveBottom(int** zone, InventoryPlayer* inventory, int* turn)
                                 break;
                             }
 
+                        case PNJ:
+                            talkPNJ(inventory);
+                            *(turn) += 1;
+                            displayTurn(turn);
+                            break;
+
                         case Portail_1_et_2:
                             //Si le joueur a le niveau requis
                             generateZone(zone, Zone_2);
@@ -588,6 +652,13 @@ void moveLeft(int** zone, InventoryPlayer* inventory, int* turn)
                                 displayTurn(turn);
                             }
                             break;
+
+                        case PNJ:
+                            talkPNJ(inventory);
+                            *(turn) += 1;
+                            displayTurn(turn);
+                            break;
+
                         case Portail_1_et_2:
                             //Si le joueur a le niveau requis
                             generateZone(zone, Zone_2);
@@ -678,6 +749,13 @@ void moveRight(int** zone, InventoryPlayer* inventory, int* turn)
                                 displayTurn(turn);
                             }
                             break;
+
+                        case PNJ:
+                            talkPNJ(inventory);
+                            *(turn) += 1;
+                            displayTurn(turn);
+                            break;
+
                         case Portail_1_et_2:
                             //Si le joueur a le niveau requis
                             generateZone(zone, Zone_2);
@@ -738,7 +816,7 @@ void deleteItem(InventoryPlayer* inventory, enum Item item)
     }
 }
 
-//Brisage d'un outil
+//Brisage d'un outil/arme
 void brokenTool(InventoryPlayer* inventory, enum Item item)
 {
     printf("\nVotre %s s'est brisee !\n\n",getItemName(item));
@@ -839,8 +917,8 @@ void addWoodInventory(InventoryPlayer* inventory, int zone)
                 break;
             }else if(inventory[i].name == Sapin)//Si le joueur possède déjà des sapins
             {
+
                 inventory[i].quantity += rand() % (4 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 sapins
-                printf("%d",inventory[i].quantity);
 
                 if(inventory[i].quantity > 20)
                 {
