@@ -96,6 +96,7 @@ typedef struct {
     int quantity;
     int type;
     int durability;
+    int maxDurability;
     int damage;
 }InventoryPlayer;
 
@@ -130,9 +131,10 @@ void itemStart(InventoryPlayer*);
 void addPlantInventory(InventoryPlayer*, int);
 void addWoodInventory(InventoryPlayer*, int);
 void addStoneInventory(InventoryPlayer*, int);
-void talkPNJ();
+void talkPNJ(InventoryPlayer* inventory);
 
 int checkItem(InventoryPlayer*, enum Item);
 void brokenTool(InventoryPlayer*, enum Item);
+void repairTool(InventoryPlayer*);
 void deleteItem(InventoryPlayer*, enum Item);
 #endif //C_HEADER_H
