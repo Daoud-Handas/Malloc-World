@@ -55,7 +55,7 @@ void launchGame()
     {
         zone1[i] = (int*)malloc(COLUMN * sizeof(int));
     }
-  /*for(int i = 0  ; i < ROW ; i += 1)
+  for(int i = 0  ; i < ROW ; i += 1)
     {
         for(int j = 0  ; j < COLUMN ; j += 1)
         {
@@ -65,7 +65,7 @@ void launchGame()
                 zone1[i][j] = 1;
             }
         }
-    }*/
+    }
 
 
     printf("BIENVENUE DANS MALLOC WORLD !\n\n\n");
@@ -76,10 +76,10 @@ void launchGame()
             switch(choice)
             {
                 case 1:
-                    generateZone(zone1,Zone_1);
+                    //generateZone(zone1,Zone_1);
                     itemStart(inventory);//Attribue les equipements de départ
 
-                    while (game < 10){
+                    while (game < 20){
 
                         displayZone(zone1,Zone_1);
                         printf("\n\nQue voulez-vous faire ?\n1=>Se deplacer\n2=>Regarder l'inventaire\n");
@@ -280,7 +280,19 @@ void viewInventory(InventoryPlayer* inventory)
         printf("Quantite : %d\n",inventory[i].quantity);
         printf("Nom : %s\n",getItemName(inventory[i].name));
         printf("Type : %s\n", getItemType(inventory[i].type));
-        printf("Degat : %d\nDurabilite : %d\n\n",inventory[i].damage, inventory[i].durability);
+
+        if(inventory[i].damage > 0 && inventory[i].durability > 0)
+        {
+            printf("Degat : %d\nDurabilite : %d\n\n",inventory[i].damage, inventory[i].durability);
+
+        }else if(inventory[i].durability > 0)
+        {
+            printf("Durabilite : %d\n\n",inventory[i].durability);
+
+        }else
+        {
+            printf("\n\n");
+        }
     }
 }
 
@@ -339,8 +351,15 @@ void repairTool(InventoryPlayer* inventory)
                 case 8:
                 case 9:
                 case 10:
-                    inventory[item[choice-1]].durability = inventory[item[choice-1]].maxDurability;
-                    printf("\nEt voila ! Votre %s est comme neuf !\n", getItemName(inventory[item[choice-1]].name));
+                    if(choice <= usedItem)
+                    {
+                        inventory[item[choice-1]].durability = inventory[item[choice-1]].maxDurability;
+                        printf("\nEt voila ! Votre %s est comme neuf !\n", getItemName(inventory[item[choice-1]].name));
+                    }else
+                    {
+                        printf("Arretez de vous moquer de moi ! Si vous ne voulez rien reparer changeons de sujet !\n\n");
+                    }
+
                     break;
             }
             default:
@@ -405,7 +424,7 @@ void moveTop(int** zone, InventoryPlayer* inventory, int* turn)
                     switch (zone[i-1][j])
                     {
                         case Case_infranchissable:
-                            printf("Deplacement impossible !\n");
+                            printf("\nDeplacement impossible !\n");
                             displayTurn(turn);
                             break;
 
@@ -463,17 +482,19 @@ void moveTop(int** zone, InventoryPlayer* inventory, int* turn)
                             *(turn) += 1;
                             displayTurn(turn);
                             break;
+
                         case Portail_1_et_2:
                             //Si le joueur a le niveau requis
                             generateZone(zone, Zone_2);
 
+                        //Si on se déplace dans une case qui n'existe pas
                         default:
-                            printf("Deplacement impossible !\n");
+                            printf("\nDeplacement impossible !\n");
                             displayTurn(turn);
                     }
                 }else
                 {
-                    printf("Deplacement impossible !\n");
+                    printf("\nDeplacement impossible !\n");
                     displayTurn(turn);
                 }
             }
@@ -830,13 +851,16 @@ void addPlantInventory(InventoryPlayer* inventory, int zone)
 
     if(zone == Zone_1)
     {
+
         for(int i = 0 ; i < MAXSLOT ; i += 1)
         {
+            printf("\nDurabilite : %d\n",inventory[2].durability);
             if(inventory[i].name == 0)//Si un emplacement est vide
             {
                 inventory[i].quantity = inventory[i].quantity + rand() % (4 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 herbes
                 inventory[i].name = Herbe;
                 inventory[i].type = Ressource;
+
                 for(i = 0 ; i < MAXSLOT ; i += 1)
                 {
                     if(inventory[i].name == Serpe_bois)
@@ -850,10 +874,10 @@ void addPlantInventory(InventoryPlayer* inventory, int zone)
                     }
                 }
                 break;
-            }else if(inventory[i].name == Herbe)//Si le joueur possède déjà de l'herbe
+            }else if(inventory[i].name == Herbe && inventory[i].quantity < 5)//Si le joueur possède déjà de l'herbe
             {
 
-                inventory[i].quantity += rand() % (30 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 sapins
+                inventory[i].quantity += rand() % (4 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 herbes
 
                 if(inventory[i].quantity > 20)
                 {
@@ -861,20 +885,33 @@ void addPlantInventory(InventoryPlayer* inventory, int zone)
                     while(inventory[i].quantity > 20)
                     {
                         inventory[i].quantity -= 1;
-
                         counter += 1;
                     }
-
-                    i = 0;//On refait le tour de l'inventaire
                     for(i = 0 ; i < MAXSLOT ; i += 1)
                     {
                         if(inventory[i].name == 0)//Si un emplacement est vide
                         {
-                            inventory[i].quantity += counter;//Met à l'emplacement suivant le reste des ressources
+                            inventory[i].quantity += counter;//Met sur le nouvel emplacement le reste des ressources
                             inventory[i].name = Herbe;
                             inventory[i].type = Ressource;
                             break;
                         }
+                    }
+                }
+
+                i = 0;//On refait le tour de l'inventaire
+                for(i = 0 ; i < MAXSLOT ; i += 1)
+                {
+                    //Effet sur l'outil
+                    if(inventory[i].name == Serpe_bois)
+                    {
+                        inventory[i].durability -= 1;//Usure de 10% sur les plantes de zone 1
+
+                        if(inventory[i].durability == 0)
+                        {
+                            brokenTool(inventory,Serpe_bois);//L'outil se casse
+                        }
+                        break;
                     }
                 }
                 break;
