@@ -55,7 +55,7 @@ void launchGame()
     {
         zone1[i] = (int*)malloc(COLUMN * sizeof(int));
     }
-  for(int i = 0  ; i < ROW ; i += 1)
+  /*for(int i = 0  ; i < ROW ; i += 1)
     {
         for(int j = 0  ; j < COLUMN ; j += 1)
         {
@@ -65,7 +65,7 @@ void launchGame()
                 zone1[i][j] = 1;
             }
         }
-    }
+    }*/
 
 
     printf("BIENVENUE DANS MALLOC WORLD !\n\n\n");
@@ -76,7 +76,7 @@ void launchGame()
             switch(choice)
             {
                 case 1:
-                    //generateZone(zone1,Zone_1);
+                    generateZone(zone1,Zone_1);
                     itemStart(inventory);//Attribue les equipements de départ
 
                     while (game < 20){
@@ -874,7 +874,7 @@ void addPlantInventory(InventoryPlayer* inventory, int zone)
                     }
                 }
                 break;
-            }else if(inventory[i].name == Herbe && inventory[i].quantity < 5)//Si le joueur possède déjà de l'herbe
+            }else if(inventory[i].name == Herbe && inventory[i].quantity < 20)//Si le joueur possède déjà de l'herbe
             {
 
                 inventory[i].quantity += rand() % (4 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 herbes
@@ -952,10 +952,10 @@ void addWoodInventory(InventoryPlayer* inventory, int zone)
                     }
                 }
                 break;
-            }else if(inventory[i].name == Sapin)//Si le joueur possède déjà des sapins
+            }else if(inventory[i].name == Sapin && inventory[i].quantity < 20)//Si le joueur possède déjà du sapin
             {
 
-                inventory[i].quantity += rand() % (4 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 sapins
+                inventory[i].quantity += rand() % (4 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 sapin
 
                 if(inventory[i].quantity > 20)
                 {
@@ -965,17 +965,31 @@ void addWoodInventory(InventoryPlayer* inventory, int zone)
                         inventory[i].quantity -= 1;
                         counter += 1;
                     }
-
-                    i = 0;//On refait le tour de l'inventaire
                     for(i = 0 ; i < MAXSLOT ; i += 1)
                     {
                         if(inventory[i].name == 0)//Si un emplacement est vide
                         {
-                            inventory[i].quantity += counter;//Met à l'emplacement suivant le reste des ressources
+                            inventory[i].quantity += counter;//Met sur le nouvel emplacement le reste des ressources
                             inventory[i].name = Sapin;
                             inventory[i].type = Ressource;
                             break;
                         }
+                    }
+                }
+
+                i = 0;//On refait le tour de l'inventaire
+                for(i = 0 ; i < MAXSLOT ; i += 1)
+                {
+                    //Effet sur l'outil
+                    if(inventory[i].name == Hache_bois)
+                    {
+                        inventory[i].durability -= 1;//Usure de 10% sur les bois de zone 1
+
+                        if(inventory[i].durability == 0)
+                        {
+                            brokenTool(inventory,Hache_bois);//L'outil se casse
+                        }
+                        break;
                     }
                 }
                 break;
@@ -1016,7 +1030,7 @@ void addStoneInventory(InventoryPlayer* inventory, int zone)
                         }
                     }
                 }
-            }else if(inventory[i].name == Pierre)//Si le joueur possède déjà des pierres
+            }else if(inventory[i].name == Pierre && inventory[i].quantity < 20)//Si le joueur possède déjà des pierres
             {
 
                 inventory[i].quantity += rand() % (4 + 1 - 1) + 1;//Possibilité d'avoir entre 1 et 4 pierres
@@ -1027,20 +1041,33 @@ void addStoneInventory(InventoryPlayer* inventory, int zone)
                     while(inventory[i].quantity > 20)
                     {
                         inventory[i].quantity -= 1;
-
                         counter += 1;
                     }
-
-                    i = 0;//On refait le tour de l'inventaire
                     for(i = 0 ; i < MAXSLOT ; i += 1)
                     {
                         if(inventory[i].name == 0)//Si un emplacement est vide
                         {
-                            inventory[i].quantity += counter;//Met à l'emplacement suivant le reste des ressources
+                            inventory[i].quantity += counter;//Met sur le nouvel emplacement le reste des ressources
                             inventory[i].name = Pierre;
                             inventory[i].type = Ressource;
                             break;
                         }
+                    }
+                }
+
+                i = 0;//On refait le tour de l'inventaire
+                for(i = 0 ; i < MAXSLOT ; i += 1)
+                {
+                    //Effet sur l'outil
+                    if(inventory[i].name == Pioche_bois)
+                    {
+                        inventory[i].durability -= 1;//Usure de 10% sur les pierres de zone 1
+
+                        if(inventory[i].durability == 0)
+                        {
+                            brokenTool(inventory,Pioche_bois);//L'outil se casse
+                        }
+                        break;
                     }
                 }
                 break;
