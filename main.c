@@ -4,6 +4,7 @@
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
+#include <conio.h>
 
 #include "header.h"
 
@@ -13,6 +14,30 @@ int main()
 {
     launchGame();
     return 0;
+}
+//Ne récupère que les nombres lors d'une saisie
+int getIntegerOnly()
+{
+    int num = 0;
+    int ch;
+
+    do {
+        ch = getch();
+
+        //Code ASCII 0 à 9
+        if (ch >= 48 && ch <= 57)
+        {
+            printf("%c", ch);
+            // Conversion en nombre
+            num = num * 10 + (ch - 48);
+        }
+
+        // 13 est le retour à la ligne, on break à ce moment là pour ne pas le prendre en compte
+        if (ch == 13)
+            break;
+    } while (1);
+
+    return (num);
 }
 
 //Met toutes les cases à 0
@@ -55,23 +80,23 @@ void launchGame()
     {
         zone1[i] = (int*)malloc(COLUMN * sizeof(int));
     }
-  /*for(int i = 0  ; i < ROW ; i += 1)
-    {
-        for(int j = 0  ; j < COLUMN ; j += 1)
-        {
-            zone1[i][j] = Plante_zone_1;
-            if(i == 2 & j == 2)
-            {
-                zone1[i][j] = 1;
-            }
-        }
-    }*/
+    /*for(int i = 0  ; i < ROW ; i += 1)
+      {
+          for(int j = 0  ; j < COLUMN ; j += 1)
+          {
+              zone1[i][j] = Plante_zone_1;
+              if(i == 2 & j == 2)
+              {
+                  zone1[i][j] = 1;
+              }
+          }
+      }*/
 
 
     printf("BIENVENUE DANS MALLOC WORLD !\n\n\n");
     do {
         printf("Que voulez-vous faire ?\n1=>Nouvelle partie\n2=>Continuer\n3=>Quitter\n");
-        scanf("%d",&choice);
+        choice = getIntegerOnly();
         if(choice)
             switch(choice)
             {
@@ -83,7 +108,7 @@ void launchGame()
 
                         displayZone(zone1,Zone_1);
                         printf("\n\nQue voulez-vous faire ?\n1=>Se deplacer\n2=>Regarder l'inventaire\n");
-                        scanf("%d",&choice);
+                        choice = getIntegerOnly();
                         if(choice == 1)
                         {
                             movePlayer(zone1,inventory,&turn);
@@ -276,18 +301,18 @@ void viewInventory(InventoryPlayer* inventory)
         {
             continue;
         }
-        printf("Emplacement : %d\n",i+1);
-        printf("Quantite : %d\n",inventory[i].quantity);
-        printf("Nom : %s\n",getItemName(inventory[i].name));
-        printf("Type : %s\n", getItemType(inventory[i].type));
+        printf("==========Emplacement %d==========\n",i+1);
+        printf("|          Quantite : %d          \n",inventory[i].quantity);
+        printf("|          Nom : %s          \n",getItemName(inventory[i].name));
+        printf("|          Type : %s          \n", getItemType(inventory[i].type));
 
         if(inventory[i].damage > 0 && inventory[i].durability > 0)
         {
-            printf("Degat : %d\nDurabilite : %d\n\n",inventory[i].damage, inventory[i].durability);
+            printf("|          Degat : %d          |\n|          Durabilite : %d          \n\n",inventory[i].damage, inventory[i].durability);
 
         }else if(inventory[i].durability > 0)
         {
-            printf("Durabilite : %d\n\n",inventory[i].durability);
+            printf("|          Durabilite : %d          \n\n",inventory[i].durability);
 
         }else
         {
@@ -336,7 +361,7 @@ void repairTool(InventoryPlayer* inventory)
         {
             printf("%d=>%s : Durabilite %d->%d \n", i+1, getItemName(inventory[item[i]].name),inventory[item[i]].durability, inventory[item[i]].maxDurability);
         }
-        scanf("%d",&choice);
+        choice = getIntegerOnly();
         switch(choice)
         {
             if (choice <= usedItem && choice > 0)
@@ -360,7 +385,7 @@ void repairTool(InventoryPlayer* inventory)
                         printf("Arretez de vous moquer de moi ! Si vous ne voulez rien reparer changeons de sujet !\n\n");
                     }
 
-                    break;
+                break;
             }
             default:
                 printf("Arretez de vous moquer de moi ! Si vous ne voulez rien reparer changeons de sujet !\n\n");
@@ -372,13 +397,19 @@ void repairTool(InventoryPlayer* inventory)
     }
 }
 
+void inventoryPnj(InventoryPlayer* inventory)
+{
+    printf("Vous voulez acceder a votre coffre ? Tres bien, que voulez-vous faire ?\n1=>Deposer objet\n2=>Retirer objet\n\n");
+
+}
+
 //Se deplacer vers le pnj
 void talkPNJ(InventoryPlayer* inventory)
 {
     int choice;
     int end = 1;
     printf("\nSalutation camarade ! Que puis-je faire pour vous ?\n1=>Reparer equipement\n2=>Construire equipement\n3=>Gerer l'inventaire\n4=>Partir\n");
-    scanf("%d",&choice);
+    choice = getIntegerOnly();
     while(end == 1)
     {
 
@@ -387,22 +418,25 @@ void talkPNJ(InventoryPlayer* inventory)
             case 1:
                 repairTool(inventory);
                 printf("\nBesoin d'autre chose ?\n1=>Reparer equipement\n2=>Construire equipement\n3=>Gerer l'inventaire\n4=>Partir\n");
-                scanf("%d",&choice);
+                choice = getIntegerOnly();
                 break;
             case 2:
-                printf("2");
+                printf("\nBientot disponible !\n");
                 printf("\nBesoin d'autre chose ?\n1=>Reparer equipement\n2=>Construire equipement\n3=>Gerer l'inventaire\n4=>Partir\n");
-                scanf("%d",&choice);
+                choice = getIntegerOnly();
                 break;
             case 3:
-                printf("3");
+                inventoryPnj(inventory);
                 printf("\nBesoin d'autre chose ?\n1=>Reparer equipement\n2=>Construire equipement\n3=>Gerer l'inventaire\n4=>Partir\n");
-                scanf("%d",&choice);
+                choice = getIntegerOnly();
                 break;
             case 4:
                 printf("\nA bientot !\n\n");
                 end = 0;
                 break;
+
+            default:
+                printf("\nSortez de ma boutique !\n\n");
         }
 
     }
@@ -487,7 +521,7 @@ void moveTop(int** zone, InventoryPlayer* inventory, int* turn)
                             //Si le joueur a le niveau requis
                             generateZone(zone, Zone_2);
 
-                        //Si on se déplace dans une case qui n'existe pas
+                            //Si on se déplace dans une case qui n'existe pas
                         default:
                             printf("\nDeplacement impossible !\n");
                             displayTurn(turn);
@@ -801,7 +835,7 @@ void movePlayer(int** zone, InventoryPlayer* inventory, int* turn)
 {
     int direction = 0;
     printf("\nDans quelle direction voulez-vous aller ?\n1=>Haut\n2=>Bas\n3=>Gauche\n4=>Droite\n");
-    scanf("%d",&direction);
+    direction = getIntegerOnly();
 
     if(direction == Top)//Deplacement vers le haut
     {
