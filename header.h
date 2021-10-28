@@ -112,6 +112,7 @@ typedef struct{
 
 
 //Prototypes
+int getIntegerOnly();
 void launchGame();
 void freeZone(int**);
 void usePotion(Player*,int);
@@ -134,6 +135,7 @@ void addStoneInventory(InventoryPlayer*, int);
 void talkPNJ(InventoryPlayer* inventory);
 
 int checkItem(InventoryPlayer*, enum Item);
+void inventoryPnj(InventoryPlayer*);
 void brokenTool(InventoryPlayer*, enum Item);
 void repairTool(InventoryPlayer*);
 void deleteItem(InventoryPlayer*, enum Item);
