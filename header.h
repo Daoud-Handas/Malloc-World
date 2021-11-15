@@ -13,7 +13,7 @@
 #define COLUMN 5
 #define MAXSLOT 10
 
-//Code de tous les elements du jeu
+//Code de tous les elements de la map
 enum Map{
     Portail_2_et_3 = -3,
     Portail_1_et_2 = -2,
@@ -34,12 +34,14 @@ enum Map{
     Boss = 99
 };
 
+//Toutes les zones du jeu
 enum Zone{
     Zone_1 = 1,
     Zone_2 = 2,
     Zone_3 = 3
 };
 
+//Code de tous les objets du jeu
 enum Item{
     Epee_bois = 1,
     Pioche_bois = 2,
@@ -77,12 +79,14 @@ enum Item{
     Potion_vie_3 = 34
 };
 
+//Les types d'objet du jeu
 enum TypeItem
 {
     Equipement = 1,
     Ressource = 2
 };
 
+//Les directions pour les déplacement du joueur
 enum Direction{
     Top = 1,
     Bottom = 2,
@@ -100,6 +104,16 @@ typedef struct {
     int damage;
 }InventoryPlayer;
 
+//Coffre PNJ
+typedef struct {
+    int name;
+    int quantity;
+    int type;
+    int durability;
+    int maxDurability;
+    int damage;
+    int* next; //Slot infini
+}Chest;
 
 //Personnage principal
 typedef struct{
@@ -136,6 +150,7 @@ void talkPNJ(InventoryPlayer* inventory);
 
 int checkItem(InventoryPlayer*, enum Item);
 void inventoryPnj(InventoryPlayer*);
+void craftPnj(InventoryPlayer*);
 void brokenTool(InventoryPlayer*, enum Item);
 void repairTool(InventoryPlayer*);
 void deleteItem(InventoryPlayer*, enum Item);
