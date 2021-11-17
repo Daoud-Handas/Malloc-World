@@ -1,84 +1,195 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 #include <time.h>
 #include <ctype.h>
-
 #include "header.h"
+#include <time.h>
+
+ Monster monstersZ1[10];
+ Monster monstersZ2[10];
+ Monster monstersZ3[10];
+
+void generateMonster(Monster monsters[], int i);
+
+int main(){
+    srand ( time(NULL) );
+    printf("Hello \n");
+    generateMonster(monstersZ1,1);
+    generateMonster(monstersZ2,2);
+    generateMonster(monstersZ3,3);
+
+    printf("NAME %s  \n", monstersZ1[0].name );
+    printf("Number %d \n", monstersZ1[0].number );
+    printf("HP %d \n", monstersZ1[2].hp);
+    printf("XP %d \n", monstersZ1[2].xp);
+    printf("DAMAGE %d \n", monstersZ1[2].damage);
 
 
-
-int main()
-{
-    int** zone1 = (int**)malloc(ROW * sizeof(int*));
-    int game = 1;
-    int choice = 0;
-    int turn = 1;
-    InventoryPlayer inventory[MAXSLOT];
-
-    for (int i = 0; i < ROW; i++)
-    {
-        zone1[i] = (int*)malloc(COLUMN * sizeof(int));
-    }
-    for(int i = 0  ; i < ROW ; i += 1)
-    {
-        for(int j = 0  ; j < COLUMN ; j += 1)
-        {
-            zone1[i][j] = 0;
-            if(i == 2 & j == 2)
-            {
-                zone1[i][j] = 1;
-            }
-        }
-    }
-
-    printf("BIENVENUE DANS MALLOC WORLD !\n\n\n");
-    do {
-        printf("Que voulez-vous faire ?\n1=>Nouvelle partie\n2=>Continuer\n3=>Quitter\n");
-        scanf("%d",&choice);
-        if(choice)
-        switch(choice)
-        {
-            case 1:
-                //generateZone(zone1);
-                itemStart(inventory);
-                displayZone(zone1);
-                displayTurn(&turn);
-                while (game < 10){
-                    printf("Que voulez-vous faire ?\n1=>Se deplacer\n2=>Regarder l'inventaire\n");
-                    scanf("%d",&choice);
-                    if(choice == 1)
-                    {
-                        movePlayer(zone1,inventory);
-                        displayTurn(&turn);
-                    } else if (choice == 2)
-                    {
-                        viewInventory(inventory);
-                    }
-                    game += 1;
-                }
-                break;
-            case 2:
-                printf("Pas disponible !\n\n\n");
-                break;
-            case 3:
-                printf("A bientot !");
-                game = 0;
-                break;
-            default:
-                printf("Les instructions sont claires pourtant, recommmence !\n");
-                break;
-        }
-    }while(game == 1);
-
-
-    for (int i = 0; i < ROW; i++)
-        free(zone1[i]);
-
-    free(zone1);
-    return 0;
 }
+//int main()
+//{
+//    int** zone1 = (int**)malloc(ROW * sizeof(int*));
+//    int game = 1;
+//    int choice = 0;
+//    int turn = 1;
+//    InventoryPlayer inventory[MAXSLOT];
+//
+//    for (int i = 0; i < ROW; i++)
+//    {
+//        zone1[i] = (int*)malloc(COLUMN * sizeof(int));
+//    }
+//    for(int i = 0  ; i < ROW ; i += 1)
+//    {
+//        for(int j = 0  ; j < COLUMN ; j += 1)
+//        {
+//            zone1[i][j] = 0;
+//            if(i == 2 & j == 2)
+//            {
+//                zone1[i][j] = 1;
+//            }
+//        }
+//    }
+//
+//    printf("BIENVENUE DANS MALLOC WORLD !\n\n\n");
+//    do {
+//        printf("Que voulez-vous faire ?\n1=>Nouvelle partie\n2=>Continuer\n3=>Quitter\n");
+//        scanf("%d",&choice);
+//        if(choice)
+//        switch(choice)
+//        {
+//            case 1:
+//
+//
+//
+//                //generateZone(zone1);
+//                itemStart(inventory);
+//                displayZone(zone1);
+//                displayTurn(&turn);
+//                while (game < 10){
+//                    printf("Que voulez-vous faire ?\n1=>Se deplacer\n2=>Regarder l'inventaire\n3=>Combattre\n");
+//                    scanf("%d",&choice);
+//                    switch(choice){
+//                        case 1:
+//                            movePlayer(zone1,inventory);
+//                            displayTurn(&turn);
+//                        case 2:
+//                            viewInventory(inventory);
+//                        case 3:
+//                            playerFight();
+//                    }
+//
+//                    game += 1;
+//                }
+//                break;
+//            case 2:
+//                printf("Pas disponible !\n\n\n");
+//                break;
+//            case 3:
+//                printf("A bientot !");
+//                game = 0;
+//                break;
+//            default:
+//                printf("Les instructions sont claires pourtant, recommmence !\n");
+//                break;
+//        }
+//    }while(game == 1);
+//
+//
+//    for (int i = 0; i < ROW; i++)
+//        free(zone1[i]);
+//
+//    free(zone1);
+//    return 0;
+//}
+
+void generateMonster(Monster monsters[], int zone) {
+    int randomHp = 0;
+    int randomXp = 0;
+    int randomDamage = 0;
+    static const char *monsterNamesZ1[] = {
+            "Phantomtalon",
+            "Razorpod",
+            "Rottingmirage",
+            "Banesnare",
+            "Coffinwings",
+            "Rotwings",
+            "Metalchild",
+            "Tombclaw",
+            "Emberstrike",
+            "Bowelserpent",
+    };
+    static const char *monsterNamesZ2[] = {
+            "Toxinsword",
+            "Grieveface",
+            "Flamemask",
+            "Stenchmorph",
+            "Stonemutant",
+            "Blazebody",
+            "Aurapod",
+            "Gallmouth",
+            "Vortexfiend",
+            "Horrorwoman",
+    };
+    static const char *monsterNamesZ3[] = {
+            "Rustmask",
+            "Dustcat",
+            "Grimefigure",
+            "Shadowcat",
+            "Mournwing",
+            "Decayboy",
+            "Warphag",
+            "Dustling",
+            "Murklich",
+            "Chaosstrike",
+    };
+    switch (zone) {
+        case 1:
+            for(int i=0; i < 10; i++){
+                randomHp = (rand() % (5 + 1 - 2)) + 2;
+                randomXp = (rand() % (4 + 1 - 1)) + 1;
+                randomDamage = (rand() % (3 + 1 - 1)) + 1;
+                monsters[i].hp = randomHp;
+                monsters[i].xp = randomXp;
+                monsters[i].damage = randomDamage;
+                strcpy(monsters[i].name, monsterNamesZ1[i]);
+                monsters[i].number = i+12;
+
+
+            }
+
+            break;
+        case 2:
+            for(int i=0; i < 10; i++) {
+                randomHp = (rand() % (7 + 1 - 4)) + 4;
+                randomXp = (rand() % (6 + 1 - 3)) + 3;
+                randomDamage = (rand() % (6 + 1 - 3)) + 3;
+                monsters[i].hp = randomHp;
+                monsters[i].xp = randomXp;
+                monsters[i].damage = randomDamage;
+                strcpy(monsters->name, monsterNamesZ2[i]);
+                monsters[i].number = i+22;
+
+            }
+            break;
+        case 3:
+            for(int i=0; i < 10; i++) {
+                randomHp = (rand() % (15 + 1 - 8)) + 8;
+                randomXp = (rand() % (20 + 1 - 7)) + 7;
+                randomDamage = (rand() % (9 + 1 - 6)) + 6;
+                monsters[i].hp = randomHp;
+                monsters[i].xp = randomXp;
+                monsters[i].damage = randomDamage;
+                strcpy(monsters->name, monsterNamesZ3[i]);
+                monsters[i].number = i+32;
+
+            }
+            break;
+        default: break;
+
+    }
+}
+
 void displayTurn(int* turn)
 {
     printf("Tour %d\n",*turn);
@@ -234,6 +345,9 @@ int checkItem(InventoryPlayer inventory[], enum Item item)
     }
 }
 
+
+
+
 void movePlayer(int** zone, InventoryPlayer* inventory)
 {
     int direction;
@@ -307,3 +421,97 @@ void usePotion (Player* character, int potion)
     }
 }
 
+
+
+
+
+void choosenMonster(){
+    // check le level de la map,
+    //printf("Monstre rencontré :", name, hp, xp);
+}
+
+void chooseWeapon(){
+}
+
+void choosePotion(){
+    printf("Sélectionnez la potion que vous souhaitez boire :\n1 - Potion de vie |\n2 - Potion de vie ||\n3 - Potion de vie |||\n");
+    int choice;
+    scanf("%d", choice);
+    switch(choice){
+        case 1:
+            ;
+        case 2:
+            ;
+        case 3:
+            ;
+        default:
+            printf("Erreur : Veuillez sélectionner :\n1 - Potion de vie |\n2 - Potion de vie ||\n3 - Potion de vie |||\n");
+    }
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
+
+void choseRun(){
+}
+
+void levelUp(Player *player) {
+    switch (player -> level) {
+        case  2: player->max_hp = LIFE + level_2; player ->current_hp = player->max_hp; player->xp = 0; player->level+= 1;break;
+        case  3: player->max_hp = LIFE + level_3; player ->current_hp = player->max_hp;player->xp = 0; player->level+= 1;break;
+        case  4: player->max_hp = LIFE + level_4; player ->current_hp = player->max_hp;player->xp = 0; player->level+= 1;break;
+        case  5: player->max_hp = LIFE + level_5; player ->current_hp = player->max_hp;player->xp = 0; player->level+= 1;break;
+        case  6: player->max_hp = LIFE + level_6; player ->current_hp = player->max_hp;player->xp = 0; player->level+= 1;break;
+        case  7: player->max_hp = LIFE + level_7; player ->current_hp = player->max_hp;player->xp = 0; player->level+= 1;break;
+        case  8: player->max_hp = LIFE + level_8; player ->current_hp = player->max_hp;player->xp = 0; player->level+= 1;break;
+        case  9: player->max_hp = LIFE + level_9; player ->current_hp = player->max_hp;player->xp = 0; player->level+= 1;break;
+        case  10: player->max_hp = LIFE + level_10; player ->current_hp = player->max_hp;break;
+        default: break;
+    }
+
+}
+
+void weaponDurability(){
+}
+
+//if player die : game --> stop and player retry at the beginning
+//if monster die : player win xp and position == 0
+void resultFight(){
+}
+
+//Choix debut du tour : potion / attaquer / fuir
+void beginFight(Player* character){
+    int choice;
+    printf("Veuillez choisir votre action :\n1 - Attaquer\n2 - Potion\n3 - Fuire\n");
+    scanf("%d",choice);
+    switch (choice) {
+        case 1:
+            printf("Vous avez choisi d'attaquer.\n");
+            //---> attackMonster();
+        case 2:
+            printf("Vous avez choisi de vous régénérer.\n");
+            //---> choosePotion();
+        case 3:
+            printf("Vous avez choisi de fuir le combat.");
+            //---> choseRun();}
+}
+levelUp(character);
+}
+
+//Initialisation du combat : Le joueur à la possibilité de choisir son arme de combat avant de commencer le premier tour.
+// SI ET SEULEMENT SI, IL POSSEDE PLUSIEURS ARMES
+void chooseFirstWeapon(){
+    printf("Veuillez sélectionner une arme principale de combat.");
+    chooseWeapon();
+}
+
+//Fonction principal du combat
+void playerFight(Player* character) {
+    printf("Début du combat.\n");
+    chooseFirstWeapon();
+    choosenMonster();
+//    while(choosenMonster(life == 0)){
+//        printf("test");
+//    }
+}

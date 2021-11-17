@@ -12,6 +12,7 @@
 #define ROW 5
 #define COLUMN 5
 #define MAXSLOT 10
+#define LIFE 100
 
 //Code de tous les elements du jeu
 enum Map{
@@ -33,6 +34,62 @@ enum Map{
     //Monstres = 12 à 98
     Boss = 99
 };
+
+enum Level{
+    level_1 = 10,
+    level_2 = 20,
+    level_3= 30,
+    level_4 = 40,
+    level_5= 50,
+    level_6= 50,
+    level_7= 50,
+    level_8 = 75,
+    level_9 = 75,
+    level_10= 0,
+};
+
+
+
+enum MonsterNameZ1{
+    Phantomtalon,
+    Razorpod,
+    Rottingmirage,
+    Banesnare,
+    Coffinwings,
+    Rotwings,
+    Metalchild,
+    Tombclaw,
+    Emberstrike,
+    Bowelserpent,
+};
+
+enum MonsterNameZ2{
+    Toxinsword,
+    Grieveface,
+    Flamemask,
+    Stenchmorph,
+    Stonemutant,
+    Blazebody,
+    Aurapod,
+    Gallmouth,
+    Vortexfiend,
+    Horrorwoman,
+};
+
+enum MonsterNameZ3{
+    Rustmask,
+    Dustcat,
+    Grimefigure,
+    Shadowcat,
+    Mournwing,
+    Decayboy,
+    Warphag,
+    Dustling,
+    Murklich,
+    Chaosstrike,
+};
+
+
 
 enum Item{
     Epee_bois = 1,
@@ -84,6 +141,16 @@ enum Direction{
     Right = 4
 };
 
+typedef struct{
+    int number;
+    char name[25];
+    int hp;
+    int xp;
+    int damage;
+}Monster;
+
+//struct Monster t { 12, "Ezequiel", 2, 2};
+
 //Inventaire
 typedef struct{
     int name;
@@ -91,7 +158,7 @@ typedef struct{
     int durability;
     int damage;
 }InventoryPlayer;
-
+//Voir pour la liste des armes, selection arme début de combat
 
 //Personnage principal
 typedef struct{
@@ -115,4 +182,7 @@ void movePlayer(int**, InventoryPlayer*);
 void swapCase(int*, int*);
 void viewInventory(InventoryPlayer[]);
 void itemStart(InventoryPlayer*);
+void playerFight();
+void levelUp();
+void beginFight();
 #endif //C_HEADER_H
