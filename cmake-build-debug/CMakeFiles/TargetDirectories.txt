@@ -1,0 +1,3 @@
+/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/CMakeFiles/Malloc_World.dir

@@ -103,6 +103,8 @@ int main(){
 //    return 0;
 //}
 
+
+
 void generateMonster(Monster monsters[], int zone) {
     int randomHp = 0;
     int randomXp = 0;
@@ -184,6 +186,11 @@ void generateMonster(Monster monsters[], int zone) {
                 monsters[i].number = i+32;
 
             }
+            strcpy(monsters[10].name, "Onizuka");
+            monsters[10].damage = 15;
+            monsters[10].xp = 15;
+            monsters[10].hp = 15;
+            monsters[10].number = 99;
             break;
         default: break;
 
