@@ -4,7 +4,7 @@
 # compile C with /Library/Developer/CommandLineTools/usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/kimveng/Desktop/New_World/malloc/Malloc-World/.
+C_INCLUDES = -I/Users/kimveng/CLionProjects/Malloc-World/.
 
 C_FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.0.sdk -std=gnu11
 

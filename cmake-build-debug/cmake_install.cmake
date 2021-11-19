@@ -1,4 +1,4 @@
-# Install script for directory: /Users/kimveng/Desktop/New_World/malloc/Malloc-World
+# Install script for directory: /Users/kimveng/CLionProjects/Malloc-World
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

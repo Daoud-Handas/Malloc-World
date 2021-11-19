@@ -8,43 +8,43 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug"/>
+				<Option working_dir="/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug"/>
+				<Option working_dir="/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug"/>
+				<Option working_dir="/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Malloc_World">
-				<Option output="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Malloc_World" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug"/>
+				<Option output="/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Malloc_World" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/."/>
+					<Add directory="/Users/kimveng/CLionProjects/Malloc-World/."/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
@@ -52,20 +52,20 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 Malloc_World"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 Malloc_World"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Malloc_World/fast">
-				<Option output="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Malloc_World" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug"/>
+				<Option output="/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Malloc_World" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/."/>
+					<Add directory="/Users/kimveng/CLionProjects/Malloc-World/."/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include"/>
 					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
@@ -73,38 +73,41 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 Malloc_World/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/Desktop/New_World/malloc/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 Malloc_World/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kimveng/CLionProjects/Malloc-World/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/actionPlayer.h">
+		<Unit filename="/Users/kimveng/CLionProjects/Malloc-World/actionPlayer.h">
 			<Option target="Malloc_World"/>
 		</Unit>
-		<Unit filename="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/fight.h">
+		<Unit filename="/Users/kimveng/CLionProjects/Malloc-World/fight.h">
 			<Option target="Malloc_World"/>
 		</Unit>
-		<Unit filename="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/header.h">
+		<Unit filename="/Users/kimveng/CLionProjects/Malloc-World/header.h">
 			<Option target="Malloc_World"/>
 		</Unit>
-		<Unit filename="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/inventory.h">
+		<Unit filename="/Users/kimveng/CLionProjects/Malloc-World/inventory.h">
 			<Option target="Malloc_World"/>
 		</Unit>
-		<Unit filename="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/main.c">
+		<Unit filename="/Users/kimveng/CLionProjects/Malloc-World/main.c">
 			<Option target="Malloc_World"/>
 		</Unit>
-		<Unit filename="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/main.h">
+		<Unit filename="/Users/kimveng/CLionProjects/Malloc-World/main.h">
 			<Option target="Malloc_World"/>
 		</Unit>
-		<Unit filename="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/map.h">
+		<Unit filename="/Users/kimveng/CLionProjects/Malloc-World/map.h">
 			<Option target="Malloc_World"/>
 		</Unit>
-		<Unit filename="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/other.h">
+		<Unit filename="/Users/kimveng/CLionProjects/Malloc-World/monsterHandler.h">
 			<Option target="Malloc_World"/>
 		</Unit>
-		<Unit filename="/Users/kimveng/Desktop/New_World/malloc/Malloc-World/CMakeLists.txt">
+		<Unit filename="/Users/kimveng/CLionProjects/Malloc-World/other.h">
+			<Option target="Malloc_World"/>
+		</Unit>
+		<Unit filename="/Users/kimveng/CLionProjects/Malloc-World/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

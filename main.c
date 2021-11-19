@@ -4,7 +4,6 @@
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
-#include <conio.h>
 
 #include "header.h"
 #include "actionPlayer.h"

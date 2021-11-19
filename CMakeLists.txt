@@ -13,4 +13,5 @@ add_executable(Malloc_World
         main.c
         main.h
         map.h
+        monsterHandler.h
         other.h)

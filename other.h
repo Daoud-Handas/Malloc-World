@@ -3,6 +3,7 @@
 //
 
 #include "header.h"
+#include "monsterHandler.h"
 
 //Ne récupère que les nombres lors d'une saisie
 int getIntegerOnly()
