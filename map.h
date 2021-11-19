@@ -2,7 +2,7 @@
 // Created by daoud on 15/11/2021.
 //
 
-#include "header.h"
+#include "../header.h"
 
 //Affiche le nombre de tour
 void displayTurn(int* turn)

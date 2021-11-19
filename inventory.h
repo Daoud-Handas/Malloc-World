@@ -2,7 +2,7 @@
 // Created by daoud on 15/11/2021.
 //
 
-#include "header.h"
+#include "../header.h"
 
 //Traduit les enums des items en renvoyant leur equivalent en string
 const char* getItemName(enum Item item)
@@ -107,7 +107,7 @@ void viewInventory(InventoryPlayer* inventory)
 
         if(inventory[i].damage > 0 && inventory[i].durability > 0)
         {
-            printf("|          Degat : %d          |\n|          Durabilite : %d          \n\n",inventory[i].damage, inventory[i].durability);
+            printf("|          Degat : %d          \n|          Durabilite : %d          \n\n",inventory[i].damage, inventory[i].durability);
 
         }else if(inventory[i].durability > 0)
         {
@@ -182,7 +182,7 @@ void repairTool(InventoryPlayer* inventory)
     //Si on trouve une arme/outil usé(e)
     if(usedItem > 0)
     {
-        printf("\nIl semblerait que vous avez besoin de mon expertise ! Lequel voulez-vous que je repare ?\n");
+        printf("\nIl semblerait que vous avez besoin de mon expertise ! Lequel de vos equipements voulez-vous que je repare ?\n");
         for(int i = 0 ; i < usedItem ; i += 1)
         {
             printf("%d=>%s : Durabilite %d->%d \n", i+1, getItemName(inventory[item[i]].name),inventory[item[i]].durability, inventory[item[i]].maxDurability);
@@ -490,7 +490,7 @@ void inventoryPnj(InventoryPlayer* inventory)
 //Crafting
 void craftPnj(InventoryPlayer* inventoryPlayer)
 {
-    
+
 }
 
 #ifndef MALLOC_WORLD_MAP_H

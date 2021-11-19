@@ -2,7 +2,7 @@
 // Created by daoud on 15/11/2021.
 //
 
-#include "header.h"
+#include "../header.h"
 
 //Ne récupère que les nombres lors d'une saisie
 int getIntegerOnly()
@@ -56,7 +56,7 @@ void launchGame()
       }*/
 
 
-    printf("BIENVENUE DANS MALLOC WORLD !\n\n\n");
+    printf("|-------------------------------------------|\n|******BIENVENUE DANS MALLOC WORLD !********|\n|-------------------------------------------| \n\n");
     do {
         printf("Que voulez-vous faire ?\n1=>Nouvelle partie\n2=>Continuer\n3=>Quitter\n");
         choice = getIntegerOnly();

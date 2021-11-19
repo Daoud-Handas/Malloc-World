@@ -2,7 +2,7 @@
 // Created by daoud on 15/11/2021.
 //
 
-#include "header.h"
+#include "../header.h"
 
 
 //Se deplacer vers le pnj
@@ -442,7 +442,7 @@ void moveRight(int** zone, InventoryPlayer* inventory, int* turn)
 void movePlayer(int** zone, InventoryPlayer* inventory, int* turn)
 {
     int direction = 0;
-    printf("\nDans quelle direction voulez-vous aller ?\n1=>Haut\n2=>Bas\n3=>Gauche\n4=>Droite\n");
+    printf("\nDans quelle direction voulez-vous aller ?\n1=>Haut\n2=>Bas\n3=>Droite\n4=>Gauche\n");
     direction = getIntegerOnly();
 
     if(direction == Top)//Deplacement vers le haut

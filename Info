@@ -1,0 +1,49 @@
+- Ennemi >= 10 par zone
+
+
+1) Les rochers
+- Le joueur aura la possibilité de récolter des pierres (précieuses ou non) en tapant
+des rochers avec la pioche adéquate. Un rocher génère entre 1 et 4 ressources
+aléatoirement et use l’outil. Si l’outil est à 0 % il ne peut plus l’utiliser et doit le
+réparer.
+
+
+- Les ressources collectées seront les suivantes :
+zone | --> Pierre (10% d’usure) à l’aide d’une Pioche en bois ou supérieure
+zone || --> Fer (20% d’usure) à l’aide d’une Pioche en pierre ou supérieure
+zone ||| --> Diamant (40% d’usure) à l’aide d’une Pioche en fer
+
+
+
+2) Le bois
+- Le joueur aura la possibilité de récolter du bois en tapant des arbres avec la hache
+adéquate. Un arbre génère entre 1 et 4 ressources aléatoirement et use l’outil. Si
+l’outil est à 0 % il ne peut plus l’utiliser et doit le réparer.
+
+
+- Les ressources collectées seront les suivantes :
+zone | --> Sapin (10% d’usure) à l’aide d’une Hache en bois ou supérieure
+zone || --> Hêtre (20% d’usure) à l’aide d’une Hache en pierre ou supérieure
+zone ||| --> Chêne (40% d’usure) à l’aide d’une Hache en fer
+
+
+
+3) Les plantes
+- Le joueur aura la possibilité de récolter des herbes en utilisant la serpe adéquate.
+Une plante génère entre 1 et 4 ressources aléatoirement et use l’outil. Si l’outil est à
+0 % il ne peut plus l’utiliser et doit le réparer.
+
+
+- Les ressources collectées seront les suivantes :
+zone 1 --> Herbe (10% d’usure) à l’aide d’une Serpe en bois ou supérieure
+
+zone 2 --> Lavande (20% d’usure) à l’aide d’une Serpe en pierre ou
+supérieure
+
+zone 3 --> Chanvre (40% d’usure) à l’aide d’une Serpe en fer
+
+
+La fréquence de réapparition des ressources dans une zone est de 10 tours. (10
+actions de l’utilisateur sur la carte). Si le joueur se trouve sur la case à ce moment, la
+ressource réapparaît au tour suivant.
+
