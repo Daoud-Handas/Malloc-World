@@ -2,7 +2,7 @@
 // Created by daoud on 15/11/2021.
 //
 
-#include "../header.h"
+#include "header.h"
 
 //Traduit les enums des items en renvoyant leur equivalent en string
 const char* getItemName(enum Item item)

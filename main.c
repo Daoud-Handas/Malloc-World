@@ -7,11 +7,11 @@
 #include <conio.h>
 
 #include "header.h"
-#include "Functions/actionPlayer.h"
-#include "Functions/fight.h"
-#include "Functions/inventory.h"
-#include "Functions/map.h"
-#include "Functions/other.h"
+#include "actionPlayer.h"
+#include "fight.h"
+#include "inventory.h"
+#include "map.h"
+#include "other.h"
 
 
 int main()
