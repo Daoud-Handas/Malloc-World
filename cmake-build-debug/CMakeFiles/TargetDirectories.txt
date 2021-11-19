@@ -1,0 +1,3 @@
+C:/Users/daoud/CLionProjects/Malloc-World/cmake-build-debug/CMakeFiles/Malloc_World.dir
+C:/Users/daoud/CLionProjects/Malloc-World/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/daoud/CLionProjects/Malloc-World/cmake-build-debug/CMakeFiles/rebuild_cache.dir
