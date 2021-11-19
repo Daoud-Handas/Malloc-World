@@ -13,7 +13,7 @@
 #define COLUMN 5
 #define MAXSLOT 10
 
-//Code de tous les elements de la map
+//Code de tous les elements du jeu
 enum Map{
     Portail_2_et_3 = -3,
     Portail_1_et_2 = -2,
@@ -30,18 +30,16 @@ enum Map{
     Plante_zone_3 = 9,
     Rocher_zone_3 = 10,
     Bois_zone_3 = 11,
-    //Monstres = 12 a 98
+    //Monstres = 12 ‡ 98
     Boss = 99
 };
 
-//Toutes les zones du jeu
 enum Zone{
     Zone_1 = 1,
     Zone_2 = 2,
     Zone_3 = 3
 };
 
-//Code de tous les objets du jeu
 enum Item{
     Epee_bois = 1,
     Pioche_bois = 2,
@@ -79,14 +77,12 @@ enum Item{
     Potion_vie_3 = 34
 };
 
-//Les types d'objet du jeu
 enum TypeItem
 {
     Equipement = 1,
     Ressource = 2
 };
 
-//Les directions pour les d√©placement du joueur
 enum Direction{
     Top = 1,
     Bottom = 2,
@@ -97,23 +93,11 @@ enum Direction{
 //Inventaire
 typedef struct {
     int name;
-    int quantity;
     int type;
     int durability;
-    int maxDurability;
     int damage;
 }InventoryPlayer;
 
-//Coffre PNJ
-typedef struct {
-    int name;
-    int quantity;
-    int type;
-    int durability;
-    int maxDurability;
-    int damage;
-    int* next; //Slot infini
-}Chest;
 
 //Personnage principal
 typedef struct{
@@ -126,18 +110,15 @@ typedef struct{
 
 
 //Prototypes
-int getIntegerOnly();
-void launchGame();
-void freeZone(int**);
 void usePotion(Player*,int);
 
 void addItemToInventory(InventoryPlayer*, int);
-void generateZone(int**, int);
+void generateZone(int**);
 
 void displayInventory();
 void displayTurn(int*);
 void displayZone (int**, int);
-void moveTop(int**, InventoryPlayer*, int*);
+
 void movePlayer(int**, InventoryPlayer*, int*);
 void swapCase(int*, int*);
 void viewInventory(InventoryPlayer*);
@@ -146,12 +127,7 @@ void itemStart(InventoryPlayer*);
 void addPlantInventory(InventoryPlayer*, int);
 void addWoodInventory(InventoryPlayer*, int);
 void addStoneInventory(InventoryPlayer*, int);
-void talkPNJ(InventoryPlayer* inventory);
 
 int checkItem(InventoryPlayer*, enum Item);
-void inventoryPnj(InventoryPlayer*);
-void craftPnj(InventoryPlayer*);
-void brokenTool(InventoryPlayer*, enum Item);
-void repairTool(InventoryPlayer*);
 void deleteItem(InventoryPlayer*, enum Item);
 #endif //C_HEADER_H
