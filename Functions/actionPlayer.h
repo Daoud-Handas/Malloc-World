@@ -2,7 +2,8 @@
 // Created by daoud on 15/11/2021.
 //
 
-#include "../header.h"
+#include "header.h"
+#include "inventory.h"
 
 
 //Se deplacer vers le pnj
@@ -461,6 +462,90 @@ void movePlayer(int** zone, InventoryPlayer* inventory, int* turn)
     {
         moveRight(zone, inventory, turn);
     }
+}
+
+void selectWeapon(Player *player){
+printf("Veuillez selectionner l'emplacement de l'arme");
+
+viewInventory(player->inventory);
+int value = getchar();
+const char* weapon = getItemName(player->inventory[value].name);
+printf("Vous avez selectionné : %s", weapon);
+player->weapon = getItemFromInventory (player->inventory, value);
+
+
+}
+
+int runaway(){
+    int chance = rand() % 100;
+
+    if(chance < 30){
+        printf("Vous prenez la futie \n");
+        return 1;
+    }
+    return 0;
+
+}
+
+
+
+void selectPotion(Player *player){
+    printf("Veuillez selectionner une potion");
+
+    viewInventory(player->inventory);
+    int value = getchar();
+    const char* potion = getItemName(player->inventory[value].name);
+    if(player->inventory[value].name == 15 || player->inventory[value].name == 26 ||player->inventory[value].name == 34 ){
+        printf("Vous avez selectionné : %s", potion);
+        switch (player->inventory[value].name) {
+            case 15 :
+                player->current_hp+= 10;
+                removeElementFromInventory(player, value);
+                break;
+
+            case 26 :
+                player->current_hp+= 20;
+                removeElementFromInventory(player, value);
+                break;
+
+            case 34 :
+                player->current_hp+= 30;
+                removeElementFromInventory(player, value);
+                break;
+
+        }
+    }
+    else{
+        printf("Vous n'avez pas selectionné une potion");
+    }
+
+
+
+}
+int isPlayerDead(Player *player){
+    if(player->current_hp <= 0){
+        printf("Vous êtes mort \n");
+        return 1;
+    }
+    return 0;
+}
+
+
+
+void updatePlayerDurability(Player *player){
+    player->weapon.durability-= 1;
+}
+void playerAttackMonster(Player* player, Monster *monster){
+    monster->hp -= player->weapon.damage;
+
+}
+
+int isWeaponBroken(Player *player){
+    if(player->weapon.durability == 0){
+    printf("Votre arme est cassée, vous devez la changer \n");
+    return 1;
+    }
+    return 0;
 }
 
 #ifndef MALLOC_WORLD_MAP_H

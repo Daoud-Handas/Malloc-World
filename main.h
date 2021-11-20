@@ -30,7 +30,7 @@ enum Map{
     Plante_zone_3 = 9,
     Rocher_zone_3 = 10,
     Bois_zone_3 = 11,
-    //Monstres = 12 à 98
+    //Monstres = 12 ï¿½ 98
     Boss = 99
 };
 
@@ -106,6 +106,8 @@ typedef struct{
     int current_hp;
     int max_hp;
     InventoryPlayer * inventory;
+    InventoryPlayer weapon;
+
 }Player;
 
 

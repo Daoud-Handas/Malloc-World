@@ -2,7 +2,7 @@
 // Created by daoud on 15/11/2021.
 //
 
-#include "../header.h"
+#include "header.h"
 
 //Traduit les enums des items en renvoyant leur equivalent en string
 const char* getItemName(enum Item item)
@@ -56,6 +56,20 @@ const char* getItemType(enum TypeItem type)
         case Ressource: return "Ressource";
     }
 }
+//Select Elem from inventory
+ InventoryPlayer getItemFromInventory (InventoryPlayer* inventory, int index ){
+    for(int i = 0 ; i < MAXSLOT ; i += 1)
+    {
+        if(i == index ){
+
+            return  inventory[i];;
+        }
+
+    }
+
+
+
+};
 
 
 //Equipement donné au début de la partie
@@ -492,6 +506,11 @@ void craftPnj(InventoryPlayer* inventoryPlayer)
 {
 
 }
+
+void removeElementFromInventory(Player player, int index){
+    for(int i = index; i < MAXSLOT - 1; i++) player.inventory[i] = player.inventory[i + 1];
+};
+
 
 #ifndef MALLOC_WORLD_MAP_H
 #define MALLOC_WORLD_MAP_H

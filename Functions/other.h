@@ -2,7 +2,7 @@
 // Created by daoud on 15/11/2021.
 //
 
-#include "../header.h"
+#include "header.h"
 
 //Ne récupère que les nombres lors d'une saisie
 int getIntegerOnly()

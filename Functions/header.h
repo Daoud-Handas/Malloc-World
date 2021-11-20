@@ -57,7 +57,6 @@ enum Item{
     Pioche_pierre = 12,
     Serpe_pierre = 13,
     Hache_pierre = 14,
-    Potion_vie = 15,
     Hetre = 16,
     Fer = 17,
     Lavande = 18,
@@ -68,7 +67,6 @@ enum Item{
     Pioche_fer = 23,
     Serpe_fer = 24,
     Hache_fer = 25,
-    Potion_vie_2 = 26,
     Chene = 27,
     Diamant = 28,
     Chanvre = 29,
@@ -76,6 +74,9 @@ enum Item{
     Lance_diamant = 31,
     Marteau_diamant = 32,
     Plastron_diamant = 33,
+
+    Potion_vie = 15,
+    Potion_vie_2 = 26,
     Potion_vie_3 = 34
 };
 
@@ -122,7 +123,73 @@ typedef struct{
     int current_hp;
     int max_hp;
     InventoryPlayer * inventory;
+    InventoryPlayer  weapon;
+
+
 }Player;
+
+enum Level{
+    level_1 = 10,
+    level_2 = 20,
+    level_3= 30,
+    level_4 = 40,
+    level_5= 50,
+    level_6= 50,
+    level_7= 50,
+    level_8 = 75,
+    level_9 = 75,
+    level_10= 0,
+};
+
+
+
+enum MonsterNameZ1{
+    Phantomtalon,
+    Razorpod,
+    Rottingmirage,
+    Banesnare,
+    Coffinwings,
+    Rotwings,
+    Metalchild,
+    Tombclaw,
+    Emberstrike,
+    Bowelserpent,
+};
+
+enum MonsterNameZ2{
+    Toxinsword,
+    Grieveface,
+    Flamemask,
+    Stenchmorph,
+    Stonemutant,
+    Blazebody,
+    Aurapod,
+    Gallmouth,
+    Vortexfiend,
+    Horrorwoman,
+};
+
+enum MonsterNameZ3{
+    Rustmask,
+    Dustcat,
+    Grimefigure,
+    Shadowcat,
+    Mournwing,
+    Decayboy,
+    Warphag,
+    Dustling,
+    Murklich,
+    Chaosstrike,
+};
+
+typedef struct{
+    int number;
+    char name[25];
+    int hp;
+    int xp;
+    int damage;
+}Monster;
+
 
 
 //Prototypes
@@ -154,4 +221,9 @@ void craftPnj(InventoryPlayer*);
 void brokenTool(InventoryPlayer*, enum Item);
 void repairTool(InventoryPlayer*);
 void deleteItem(InventoryPlayer*, enum Item);
+InventoryPlayer getItemFromInventory (InventoryPlayer* inventory, int index );
+void selectWeapon(Player *player);
+void selectPotion(Player *player);
+void removeElementFromInventory(Player* player, int index);
+void monsterAttackPlayer(Player* player, Monster *monster);
 #endif //C_HEADER_H

@@ -4,9 +4,8 @@
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
-#include <conio.h>
 
-#include "header.h"
+#include "Functions/header.h"
 #include "Functions/actionPlayer.h"
 #include "Functions/fight.h"
 #include "Functions/inventory.h"
