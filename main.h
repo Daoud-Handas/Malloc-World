@@ -99,7 +99,7 @@ typedef struct {
 }InventoryPlayer;
 
 
-//Personnage principal
+//Personnage principal.
 typedef struct{
     int xp;
     int level;
